@@ -10,7 +10,7 @@ class VesselFrench
     @path = File.expand_path(File.join(File.dirname(__FILE__), "/"))
     @docs = "A French language study tool."
 
-    install(:custom, :study)
+    install(:primary, :study)
     install(:generic, :help)
     install(:generic, :document)
 
