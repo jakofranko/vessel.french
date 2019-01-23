@@ -29,20 +29,20 @@ class ActionStudy
         puts score
       else
         active_word.score = -1
-        puts "Sorry! The english translation of #{active_word.russian} is \"#{active_word.english}\"."
+        puts "Sorry! The english translation of #{active_word.french} is \"#{active_word.english}\"."
         puts score
       end
     elsif active_word
       active_word.score = 0
-      puts "The English translation of #{active_word.russian.capitalize} is \"#{active_word.english}\"."
+      puts "The English translation of #{active_word.french.capitalize} is \"#{active_word.english}\"."
     end
 
     word = @vocabulary.sample
-    active_word = Word.new(word['ENGLISH'],word['RUSSIAN'])
+    active_word = Word.new(word['ENGLISH'],word['FRENCH'])
     $nataniev.console_memory[@host.name]['active'] = active_word
     $nataniev.console_memory[@host.name]['history'].push(active_word)
 
-    return "##{history.length}: What is #{active_word.russian} in english?"
+    return "##{history.length}: What is #{active_word.french} in english?"
 
   end
 
@@ -51,7 +51,7 @@ class ActionStudy
     known = {}
     points = 0
     history.each do |word|
-      known[word.russian] = word.english
+      known[word.french] = word.english
       points += word.score
     end
 
@@ -73,13 +73,13 @@ end
 class Word
 
   attr_accessor :english
-  attr_accessor :russian
+  attr_accessor :french
   attr_accessor :score
 
-  def initialize english, russian
+  def initialize english, french
 
     @english = english
-    @russian = russian
+    @french = french
     @score   = 0
 
   end
