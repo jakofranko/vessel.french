@@ -5,6 +5,6 @@
 @ ENGLISH           FRENCH
 to put              metter
 to make or do       faire
-sun                 le sol
-moon                la lune
-stars               les etoiles
+the sun             le sol
+the moon            la lune
+the stars           les etoiles
