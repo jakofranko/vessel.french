@@ -10,7 +10,7 @@ class ActionStudy
     super
 
     @name = "Study"
-    @docs = "Basic French words and phrases."
+    @docs = "Basic French words and phrases. Use in the console via \"bind french study\""
 
   end
 
