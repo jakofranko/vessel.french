@@ -9,6 +9,7 @@ class VesselFrench
     @name = "French"
     @path = File.expand_path(File.join(File.dirname(__FILE__), "/"))
     @docs = "A French language study tool."
+    @corpse = CorpseBase.new
 
     install(:primary, :study)
     install(:generic, :help)
