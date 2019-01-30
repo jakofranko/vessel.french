@@ -11,14 +11,15 @@ class ActionStudy
 
     @name = "Study"
     @docs = "Basic French words and phrases. Use in the console via \"bind french study\""
+    @vocabulary = Memory_Array.new("vocabulary", @host.path).to_a
 
   end
 
   def act q = nil
 
-    if !$nataniev.console_memory[@host.name] then $nataniev.console_memory[@host.name] = {"active" => nil,"history" => []} end
-
-    @vocabulary = Memory_Array.new("vocabulary",@host.path).to_a.shuffle
+    if !$nataniev.console_memory[@host.name] then
+        $nataniev.console_memory[@host.name] = {"active" => nil, "history" => []}
+    end
 
     active_word = $nataniev.console_memory[@host.name]['active']
 
@@ -38,7 +39,7 @@ class ActionStudy
     end
 
     word = @vocabulary.sample
-    active_word = Word.new(word['ENGLISH'],word['FRENCH'])
+    active_word = Word.new(word['ENGLISH'], word['FRENCH'])
     $nataniev.console_memory[@host.name]['active'] = active_word
     $nataniev.console_memory[@host.name]['history'].push(active_word)
 
