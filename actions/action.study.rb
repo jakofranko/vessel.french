@@ -18,7 +18,7 @@ class ActionStudy
         if !@vocabulary then @vocabulary = Memory_Array.new("vocabulary", @host.path).to_a end
 
         if !$nataniev.console_memory[@host.name] then
-            $nataniev.console_memory[@host.name] = {"active" => nil, "history" => []}
+            $nataniev.console_memory[@host.name] = {"active" => nil, "history" => [], "correct" => []}
         end
 
         active_word = $nataniev.console_memory[@host.name]['active']
@@ -26,6 +26,7 @@ class ActionStudy
         if q.to_s != "" && active_word
             if active_word.english.like(q)
                 active_word.score = 1
+                $nataniev.console_memory[@host.name]['correct'].push(active_word.french)
                 puts "Correct!"
                 puts score
             else
@@ -38,7 +39,16 @@ class ActionStudy
             puts "The English translation of #{active_word.french.capitalize} is \"#{active_word.english}\"."
         end
 
-        word = @vocabulary.sample
+        if $nataniev.console_memory[@host.name]['correct'].length == @vocabulary.length
+            puts "You have correctly translated all of the vocabulary words! Starting over..."
+            $nataniev.console_memory[@host.name]['correct'] = []
+        end
+
+        word = ''
+        loop do
+            word = @vocabulary.sample
+            break unless $nataniev.console_memory[@host.name]['correct'].include? word['FRENCH']
+        end
         active_word = Word.new(word['ENGLISH'], word['FRENCH'])
         $nataniev.console_memory[@host.name]['active'] = active_word
         $nataniev.console_memory[@host.name]['history'].push(active_word)
