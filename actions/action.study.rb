@@ -14,7 +14,6 @@ class ActionStudy
 
     end
 
-    # TODO: don't allow correct words to be cycled through the study array
     # TODO: allow flexibility of which word list to study by passing in the name of the memory
     def act q = nil
         if !@vocabulary then @vocabulary = Memory_Array.new("vocabulary", @host.path).to_a end
